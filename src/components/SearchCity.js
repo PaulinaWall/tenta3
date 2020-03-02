@@ -10,11 +10,12 @@ class SearchCity extends React.Component {
 				<form onSubmit={this.props.handleSubmit}>
 					<div className="input-group">
 						<input
+							className="form-control form-control-lg"
+							onChange={this.props.handleChange}
+							id="city"
 							placeholder="Enter a city"
 							type="text"
-							className="form-control form-control-lg"
-							id="city"
-							onChange={this.props.handleChange}
+							value={this.props.city}
 						/>
 
 						<div className="input-group-append">

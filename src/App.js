@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchCity from './components/SearchCity';
 import WeatherReport from './components/WeatherReport';
+import Error from './components/Error';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -15,13 +16,18 @@ class App extends React.Component {
 		.then(response => {
 			const data = response.data
 			this.setState({
+				city: '',
 				report: {
 					data
-				}
+				},
+				errorMessage: false,
 			})
 		})
 		.catch(err => {
-			console.error(err)
+			this.setState({
+				errorMessage: true,
+				report: ''
+			})
 		})
 	}
 
@@ -47,14 +53,22 @@ class App extends React.Component {
 					<SearchCity
 						handleChange={this.handleChange}
 						handleSubmit={this.handleSubmit}
+						city={this.state.city}
 					/>
 
 					{
 						this.state.report
 						? (
 							<WeatherReport
-								name={this.state.report}
+								data={this.state.report}
 							/>
+						)
+						: ''
+					}
+					{
+						this.state.errorMessage
+						? (
+							<Error />
 						)
 						: ''
 					}
