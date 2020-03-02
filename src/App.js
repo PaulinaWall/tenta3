@@ -14,16 +14,18 @@ class App extends React.Component {
 	getAPI() {
 		axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=a9f6719e37f20890ebff5d91724dec1f&units=metric`)
 		.then(response => {
-			const data = response.data
-			this.setState({
-				city: '',
-				errorMessage: false,
-				report: {
-							data
-						}
-			})
+			if(response.data.cod === 200){
+				const data = response.data
+				this.setState({
+					city: '',
+					errorMessage: false,
+					report: {
+								data
+							}
+				})
+			}
 		})
-		.catch(err => {
+		.catch(() => {
 			//Här tömmer jag inte city medvetet då jag vill att användaren ska se stavningen
 			this.setState({
 				errorMessage: true,
