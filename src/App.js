@@ -17,23 +17,24 @@ class App extends React.Component {
 			const data = response.data
 			this.setState({
 				city: '',
-				report: {
-					data
-				},
 				errorMessage: false,
+				report: {
+							data
+						}
 			})
 		})
 		.catch(err => {
+			//Här tömmer jag inte city medvetet då jag vill att användaren ska se stavningen
 			this.setState({
 				errorMessage: true,
-				report: ''
+				report: null,
 			})
 		})
 	}
 
 	handleChange = (e) => {
 		this.setState({
-			city: e.target.value
+			[e.target.id]: e.target.value
 		})
 	}
 

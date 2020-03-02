@@ -1,7 +1,8 @@
 import React from 'react'
 
 const WeatherConditions = (props) => {
-	const mappedWeatherArray = props.data.data.weather.map(item => {
+	const {weather} = props.data.data
+	const mappedWeatherArray = weather.map(item => {
 		return <p key={item.id}>{item.description}</p>
 	})
 
